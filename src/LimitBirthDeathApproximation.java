@@ -1,23 +1,18 @@
-package beast.evolution.tree.birth.death;
+package lbdcoal;
 
-import java.util.ArrayList;
+
 import java.util.List;
-import beast.core.Input.Validate;
-import beast.core.parameter.IntegerParameter;
-import beast.evolution.tree.Tree;
-import beast.evolution.tree.TreeDistribution;
-import beast.math.Binomial;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import beast.core.Citation;
-import beast.core.Description;
-import beast.core.Input;
-import beast.core.parameter.RealParameter;
-import beast.evolution.tree.coalescent.PopulationFunction;
+import beast.base.core.Citation;
+import beast.base.core.Description;
+import beast.base.core.Input;
+import beast.base.evolution.tree.coalescent.PopulationFunction;
+import beast.base.inference.parameter.RealParameter;
 
 
 /**
@@ -63,13 +58,7 @@ public class LimitBirthDeathApproximation extends PopulationFunction.Abstract {
         return scaledMutRateParameterInput.get().getValue();
     }
 
-	/**
-	 * @return K parameter.
-	 */
-	public double getK() {
-		K = KParameterInput.get().getValue();
-		return K;
-	}
+
 
 	/**
 	 * @return scaled growth rate.
@@ -116,11 +105,12 @@ public class LimitBirthDeathApproximation extends PopulationFunction.Abstract {
 	        } else {
 	            return getTheta() * (2.0 / getIntensity(t) );
 	        }
-	        if( t > getT()) {
+	       // if( t > getT()) 
+	       // {
 	        	
-	        	return Double.NEGATIVE_INFINITY;
+	       // 	return Double.NEGATIVE_INFINITY;
 	        	
-	        }
+	       // }
 	        
 	        
 		
@@ -133,7 +123,7 @@ public class LimitBirthDeathApproximation extends PopulationFunction.Abstract {
 	public double getIntegral(double start, double finish) {
 		double gamma = getScaledGrowthRate();
 		double T = getT();
-		double K = getK();
+		//double K = getK();
 		double a, b, expMinusGammaT, expGammaFinish;
 		if (gamma >= 0.0) {
 			expMinusGammaT = Math.exp(-gamma * T);
@@ -151,7 +141,7 @@ public class LimitBirthDeathApproximation extends PopulationFunction.Abstract {
 	public double getIntensity(double t) {
 		double gamma = getScaledGrowthRate();
 		double T = getT();
-		double K = getK();
+		//double K = getK();
 		double a, b;
 		double expMinusGammaT, expGammat, oneMinusExpGammaT, intensity;
 		if (gamma >= 0.0) {
@@ -172,7 +162,7 @@ public class LimitBirthDeathApproximation extends PopulationFunction.Abstract {
 
 		double gamma = getScaledGrowthRate();
 		double T = getT();
-		double K = getK();
+	    //double K = getK();
 		double a, b, expKt, expMinusGammaT, expGammat, oneMinusExpGammaT, invItensity;
 		if (gamma >= 0.0) {
 			expMinusGammaT = Math.exp(-gamma * T);
@@ -196,7 +186,6 @@ public class LimitBirthDeathApproximation extends PopulationFunction.Abstract {
 		List<String> paramIDs = new ArrayList<>();
 		paramIDs.add(scaledGrowthRateParameterInput.get().getID());
 		paramIDs.add(timeOriginParameterInput.get().getID());
-		paramIDs.add(KParameterInput.get().getID());
 		paramIDs.add(scaledMutRateParameterInput.get().getID());
 		return paramIDs;
 

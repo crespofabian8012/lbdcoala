@@ -1,8 +1,9 @@
-package beast.base.evolution.datatype;
+package lbdcoal;
 
 
 
 import beast.base.core.Description;
+import beast.base.evolution.datatype.DataType.Base;
 
 @Description("Unphased diploid(maternal/paternal)  datatype for DNA sequences")
 public class UnphasedDiploidGenotype extends Base {
